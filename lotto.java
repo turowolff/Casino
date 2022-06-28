@@ -16,6 +16,8 @@ import java.util.Arrays;
 
 public class lotto extends JFrame {
     ArrayList<Integer> lottoinputbyuser = new ArrayList<Integer>();
+//    Arrays.sort(lottoinputbyuser);
+  
    //Arrays.sort(lottoinputbyuser);
    //int[] lottoinput = new int[6];
   //int[] lotto = {1,32};
@@ -43,7 +45,7 @@ public class lotto extends JFrame {
     
   // Anfang Attribute
   private JButton b1 = new JButton();
-  private JButton b21 = new JButton();
+  private JButton b2 = new JButton();
   private JButton b3 = new JButton();
   private JButton b4 = new JButton();
   private JButton b5 = new JButton();
@@ -62,7 +64,7 @@ public class lotto extends JFrame {
   private JButton b18 = new JButton();
   private JButton b19 = new JButton();
   private JButton b20 = new JButton();
-  private JButton b2 = new JButton();
+  private JButton b21 = new JButton();
   private JButton b22 = new JButton();
   private JButton b23 = new JButton();
   private JButton b24 = new JButton();
@@ -93,9 +95,16 @@ public class lotto extends JFrame {
   private JButton b49 = new JButton();
   private JTextField inputField = new JTextField();
   private JTextField inputField1 = new JTextField();
-  private JTextField jTextField1 = new JTextField();
+  private JTextField sameFigures = new JTextField();
   private JButton bZeigemeineZahlen = new JButton();
   private JLabel lBittewaehledeine6Zahlenaus = new JLabel();
+  private JLabel lDeinegleichenZahlen = new JLabel();
+  private JButton bStarten = new JButton();
+  private JLabel lGezogeneZahlen = new JLabel();
+  private JTextField jTextField2 = new JTextField();
+  private JTextField jTextField3 = new JTextField();
+  private JNumberField jNumberField1 = new JNumberField();
+  private JLabel lDeinGeld = new JLabel();
   // Ende Attribute
   
   public lotto() { 
@@ -103,7 +112,7 @@ public class lotto extends JFrame {
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     int frameWidth = 650; 
-    int frameHeight = 700;
+    int frameHeight = 647;
     setSize(frameWidth, frameHeight);
     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (d.width - getSize().width) / 2;
@@ -114,11 +123,36 @@ public class lotto extends JFrame {
     Container cp = getContentPane();
     cp.setLayout(null);
     // Anfang Komponenten
-    lBittewaehledeine6Zahlenaus.setBounds(37, 25, 176, 20);
+    lDeinGeld.setBounds(520, 525, 110, 20);
+    lDeinGeld.setText("Dein Geld:");
+    cp.add(lDeinGeld);
+    jNumberField1.setBounds(517, 554, 75, 20);
+    jNumberField1.setText("");
+    cp.add(jNumberField1);
+    jTextField3.setBounds(91, 544, 400, 40);
+    cp.add(jTextField3);
+    jTextField2.setBounds(176, 504, 150, 20);
+    cp.add(jTextField2);
+    lGezogeneZahlen.setBounds(178, 473, 110, 20);
+    lGezogeneZahlen.setText("Gezogene Zahlen");
+    cp.add(lGezogeneZahlen);
+    bStarten.setBounds(5, 546, 75, 25);
+    bStarten.setText("Starten");
+    bStarten.setMargin(new Insets(2, 2, 2, 2));
+    bStarten.addActionListener(new ActionListener() { ;
+      public int actionPerformed(ActionEvent evt) { 
+        bStarten_ActionPerformed(evt);
+      }
+    });
+    cp.add(bStarten);
+    lDeinegleichenZahlen.setBounds(345, 471, 150, 20);
+    lDeinegleichenZahlen.setText("Deine gleichen Zahlen");
+    cp.add(lDeinegleichenZahlen);
+    lBittewaehledeine6Zahlenaus.setBounds(13, 73, 176, 40);
     lBittewaehledeine6Zahlenaus.setText("Bitte wähle deine 6 Zahlen aus");
     cp.add(lBittewaehledeine6Zahlenaus);
     
-    bZeigemeineZahlen.setBounds(7, 502, 150, 25);
+    bZeigemeineZahlen.setBounds(0, 471, 150, 25);
     bZeigemeineZahlen.setText("Zeige meine Zahlen");
     bZeigemeineZahlen.setMargin(new Insets(2, 2, 2, 2));
     bZeigemeineZahlen.addActionListener(new ActionListener() { 
@@ -129,7 +163,7 @@ public class lotto extends JFrame {
     });
     bZeigemeineZahlen.setBackground(Color.YELLOW);
     cp.add(bZeigemeineZahlen);
-    inputField.setBounds(4, 554, 150, 20);
+    inputField.setBounds(4, 506, 150, 20);
     cp.add(inputField);
     b49.setBounds(536, 432, 75, 25);
     b49.setText("49");
@@ -391,7 +425,7 @@ public class lotto extends JFrame {
       public void actionPerformed(ActionEvent evt) { 
         //b2_ActionPerformed(evt);  
          //inputField.setText(""+ b2_ActionPerformed(evt));
-        b2_ActionPerformed(evt);
+        b21_ActionPerformed(evt);
       }
     });
     cp.add(b2);
@@ -581,8 +615,8 @@ public class lotto extends JFrame {
     
     cp.setBackground(new Color(0x22DD30));
     setUndecorated(true);
-    cp.add(jTextField1);
-    jTextField1.setBounds(359, 551, 150, 20);
+    cp.add(sameFigures);
+    sameFigures.setBounds(344, 504, 150, 20);
     // Ende Komponenten
     
     setVisible(true);
@@ -594,15 +628,15 @@ public class lotto extends JFrame {
   
   public static void main(String[] args) {
     new lotto();
-           
-  }
+    int geld= 1000;
+    bStarten_ActionPerformed(geld);
+    
+  }  
   // end of main
    
   public void b1_ActionPerformed(ActionEvent evt) {
     // TODO hier Quelltext einfügen
-       //lottoinput[zaehler] = 1;
-       //zaehler++;
-       //inputField.setText("1");
+      
     lottoinputbyuser.add(1);
   } // end of b1_ActionPerformed
 
@@ -854,6 +888,71 @@ public class lotto extends JFrame {
     inputField.setText("" +lottoinputbyuser);
   } // end of bZeigemeineZahlen_ActionPerformed
 
+  public int bStarten_ActionPerformed(ActionEvent evt, int geld) {
+  //bei bStarten steht jetzt auch int statt void
+    // TODO hier Quelltext einfügen
+    
+    int geld = geld -10;
+   
+    
+    
+        int[] zahlen = new int[6]; 
+    
+    for(int i =0; i<6; i++) {
+  
+    Random zufall = new Random();
+    
+    zahlen[i] = zufall.nextInt(49)+1;
+          
+    }
+    
+    Arrays.sort(zahlen);
+    
+    ArrayList<Integer> hilfe = new ArrayList<Integer>();
+    
+    for(int i =0; i<6; i++) {
+      hilfe.add(zahlen[i]);
+     
+    }   
+   jTextField2.setText("" +hilfe);
+    //System.out.println("" + zahlen);
+    //Random zahlen fertig 
+                    
+       int i=0;
+       int anzahlRichtige =0;
+    
+    ArrayList<Integer> hilfe1 = new ArrayList<Integer>();
+           
+          do {
+
+          if (lottoinputbyuser.get(i)==zahlen[i]) {
+            
+               hilfe1.add(zahlen[i]);
+           // inputField1.setText("Deine gleichen Zahlen: " +lottoinputbyuser.get(i));
+           
+            anzahlRichtige++;
+           }  
+          i++;                                
+        } while (i<6);
+    
+    if (hilfe1.isEmpty()) {
+          sameFigures.setText("0" );
+      jTextField3.setText("Du hast leider nicht gewonnen");
+      } else {
+          sameFigures.setText("" +hilfe1);
+      int y =anzahlRichtige*anzahlRichtige +4;//9;//Gewinnfunktion 
+        jTextField3.setText("Du hast " +y +" Euro gewonnen");
+      int geld = geld +y;
+        } // end of if-else     
+    
+    
+      return geld; 
+       
+           
+  }
+  } // end of bStarten_ActionPerformed
+
   // Ende Methoden
-} // end of class lotto
+//} 
+// end of class lotto
   
